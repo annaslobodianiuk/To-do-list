@@ -13,7 +13,12 @@ function App() {
 
   useEffect(() => {
     const tasks = JSON.parse(localStorage.getItem('tasks'));
-    setTasks(tasks);
+    if(tasks){
+      setTasks(tasks);
+    }
+    else{
+      setTasks([]);
+    }
   }, [])
 
   function addTask(name){
@@ -46,7 +51,7 @@ function App() {
     })
   }
 
-  const numberComplete = tasks.filter(task => task.done === true).length;
+  const numberComplete = tasks.filter(task => task.done).length;
   const allTasks = tasks.length;
   const message = (numberComplete === allTasks) ? "You did it 🕊" : "You can🤍";
 
